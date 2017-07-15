@@ -1,0 +1,35 @@
+#productGrid {
+	list-style: none;
+	.product {
+		float: left;
+		width: 270px;
+		height: 405px;
+		margin-right: 125px;
+		margin-top: 60px;
+		&:nth-child(3n) { margin-right: 0; }
+
+		img { width: 100% }
+		h3 { margin: 10px 0 12px 0 }
+
+		.price {
+			margin-top: 22px;
+			.slashed { text-decoration: line-through }
+			.special {
+				color: #b91919;
+				margin-left: 10px;
+			}
+		}
+
+		.colors {
+			list-style: none;
+			padding: 0;
+			.swatch {
+				width: 15px;
+				height: 15px;
+				margin-right: 5px;
+				border-radius: 50%;
+				display: inline-block;
+			}
+		}
+	}
+}

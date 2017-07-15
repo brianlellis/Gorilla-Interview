@@ -41,7 +41,7 @@ module.exports = function (grunt) {
 			options: {
 				flatten: true,
 				assets: '<%= config.build %>/assets',
-				javascript: '/js',
+				javascript: '<%= config.build %>/../js',
 				data: '<%= config.src %>/data/*.{json,yml}',
 				helpers: '<%= config.src %>/templates/helpers/**/*.js',
 				layout: '<%= config.src %>/templates/layouts/1column.hbs',
