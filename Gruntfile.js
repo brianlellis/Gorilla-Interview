@@ -91,9 +91,7 @@ module.exports = function (grunt) {
 				separator: "\n\n"
 			},
 			build: {
-				src: [
-					'<%= config.src %>/js/vendor/jquery-1.9.min.js'
-				],
+				src: ['<%= config.build %>'],
 				dest: '<%= config.build %>/js/plugins.js'
 			}
 		},

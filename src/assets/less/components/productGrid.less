@@ -1,12 +1,13 @@
 #productGrid {
 	list-style: none;
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    &.smallProd { width: 665px }
 	.product {
-		float: left;
 		width: 270px;
 		height: 405px;
-		margin-right: 125px;
 		margin-top: 60px;
-		&:nth-child(3n) { margin-right: 0; }
 
 		img { width: 100% }
 		h3 { margin: 10px 0 12px 0 }
@@ -29,6 +30,13 @@
 				margin-right: 5px;
 				border-radius: 50%;
 				display: inline-block;
+				transition-duration: 300ms;
+				cursor: pointer;
+				&:hover {
+					width: 20px;
+					height: 20px;
+					margin-top: -10px;
+				}
 			}
 		}
 	}

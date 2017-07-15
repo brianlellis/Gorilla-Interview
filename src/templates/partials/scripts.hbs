@@ -3,8 +3,6 @@ component: scripts
 ---
 
 <!-- Includes site-specific Javascript -->
+<script src="{{javascript}}/data.js"></script>
 <script src="{{javascript}}/main.js"></script>
-
-{{#each javascriptFiles}}
-	<script src="{{../javascript}}/{{this}}"></script>
-{{/each}}
+<script src="{{javascript}}/autoComplete.js"></script>
