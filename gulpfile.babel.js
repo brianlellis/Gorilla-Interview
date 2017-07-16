@@ -6,8 +6,7 @@ const   gulp        = require('gulp'),
         sass        = require('gulp-sass'), // SASS compiler
         sourcemaps  = require('gulp-sourcemaps'), // SASS sourcemap builder
         sassdoc     = require('sassdoc'), // SASS Documentation builder
-        jsdoc       = require('gulp-jsdoc3'), // JS Documentation builder
-        cucumber    = require('gulp-cucumber'), // Automated QA feature testing
+        jsdoc       = require('gulp-jsdoc3'), // JS Documentation builder 
         jshint      = require('gulp-jshint'),
         uglify      = require('gulp-uglify'),
         concat      = require('gulp-concat'),
@@ -16,16 +15,13 @@ const   gulp        = require('gulp'),
         psiNgrok    = require('psi-ngrok'), // Tunneling for PSI support
         connect     = require('gulp-connect'),
         port        = 8000,
-        imagemin    = require('gulp-imagemin'),
+        imagemin    = require('gulp-imagemin');
         // Testing Harness
-        http        = require('http'),
-        kinect      = require('connect'),
-        Launcher    = require('webdriverio/build/lib/launcher'),
-        path        = require('path'),
-        wdio        = new Launcher(path.join(__dirname, 'wdio.conf.js')),
-        serveStatic = require('serve-static'),
-        protractor  = require("gulp-protractor").protractor,
-        reporter    = require("gulp-protractor-cucumber-html-report");
+        import http from 'http'
+        import kinect from 'connect'
+        import serveStatic from 'serve-static'
+        import selenium from 'selenium-standalone'
+        import webdriver from 'gulp-webdriver'
         let httpServer;
 
 
@@ -103,31 +99,46 @@ gulp.task('psi', function () {
   });
 });
 
-// Cucumber compiler
-// run tests with the following command: npm test
-gulp.task('http', (done) => {
+// Mocha Testrunner
+gulp.task('http', done => {
   const app = kinect().use(serveStatic('build'));
   httpServer = http.createServer(app).listen(9000, done);
 });
 
-gulp.task('e2e', ['http'], () => {
-  return wdio.run(code => {
-    process.exit(code);
-  }, error => {
-    console.error('Launcher failed to start the test', error.stacktrace);
-    process.exit(1);
-  });
-});
+gulp.task('selenium', done => {
+    selenium.install({
+        logger (message) {
+            process.stdout.write(`${message} \n`)
+        },
+        progressCb: (totalLength, progressLength) => {
+            process.stdout.write(`Downloading drivers ${Math.round(progressLength / totalLength * 100)}% \r`)
+        }
+    }, err => {
+        if (err) return done(err)
 
-gulp.task('test', ['e2e'], () => {
-  httpServer.close();
-});
+        selenium.start({
+            spawnOptions: {
+                stdio: 'ignore'
+            }
+        }, (err, child) => {
+            selenium.child = child
+            console.log('Selenium error: ', err)
+            done()
+        })
+    })
+})
 
-gulp.task('cucumber', function() {
-    gulp.src('cucumber/features/*').pipe(cucumber({
-        'steps': 'features/steps/steps.js'
-    }));
-});
+gulp.task('test', ['http', 'selenium'], () => {
+    return gulp.src('wdio.conf.js')
+        .pipe(webdriver({
+            logLevel: 'verbose',
+            waitforTimeout: 12345,
+            framework: 'mocha'
+        })).once('end', () => {
+            selenium.child.kill()
+            httpServer.close()
+        })
+})
 
 
 

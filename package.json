@@ -4,7 +4,7 @@
   "description": "Personal resume website for Brian Ellis",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -20,40 +20,40 @@
   },
   "homepage": "https://github.com/BrianEllisBlueAcorn/briansResume#readme",
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.24.1",
     "breakpoint-sass": "^2.7.1",
     "browser-sync": "^2.18.7",
-    "chai": "^4.1.0",
     "connect": "^3.6.2",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-clean-css": "^3.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.0.0",
-    "gulp-cucumber": "0.0.22",
     "gulp-exit": "0.0.2",
     "gulp-html5-lint": "^1.1.0",
     "gulp-imagemin": "^3.1.1",
     "gulp-jsdoc3": "^1.0.1",
     "gulp-jshint": "^2.0.4",
     "gulp-load-plugins": "^1.5.0",
-    "gulp-protractor": "^4.1.0",
-    "gulp-protractor-cucumber-html-report": "^0.1.3",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.4.1",
     "gulp-uglify": "^2.0.1",
     "gulp-util": "^3.0.8",
+    "gulp-webdriver": "^2.0.3",
     "ink-docstrap": "^1.3.0",
     "jshint": "^2.9.4",
     "jshint-stylish": "^2.2.1",
-    "protractor-cucumber-framework": "^3.1.2",
     "psi-ngrok": "^0.1.2",
     "relative-path": "^1.1.0",
     "sassdoc": "^2.1.20",
     "serve-static": "^1.12.3",
-    "wdio-cucumber-framework": "^0.3.1",
+    "wdio-mocha-framework": "^0.5.9",
     "wdio-phantomjs-service": "^0.2.2",
-    "wdio-selenium-standalone-service": "0.0.9",
+    "wdio-selenium-standalone-service": "0.0.8",
     "wdio-spec-reporter": "^0.1.0",
-    "webdriverio": "^4.8.0"
+    "webdriverio": "^4.6.2"
   }
 }
