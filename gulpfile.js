@@ -16,7 +16,13 @@ var gulp        = require('gulp'),
     psiNgrok    = require('psi-ngrok'), // Tunneling for PSI support
     connect     = require('gulp-connect'),
     port        = 8000,
-    imagemin    = require('gulp-imagemin');
+    imagemin    = require('gulp-imagemin'),
+    // Testing Harness
+    http        = require('http'),
+    kinect = require('connect'),
+    serveStatic = require('serve-static'),
+    protractor  = require("gulp-protractor").protractor,
+    reporter    = require("gulp-protractor-cucumber-html-report");
 
 
 // create a default task and just log a message
@@ -94,12 +100,17 @@ gulp.task('psi', function () {
 
 // Cucumber compiler
 // run tests with the following command: npm test
+gulp.task('http', (done) => {
+  const app = kinect().use(serveStatic('build'));
+  http.createServer(app).listen(9000, done);
+});
+
 gulp.task('cucumber', function() {
-    return gulp.src('features/*').pipe(cucumber({
-        'steps': '/tests/features/steps/steps.js',
-        'format': 'summary'
+    gulp.src('cucumber/features/*').pipe(cucumber({
+        'steps': 'features/steps/steps.js'
     }));
 });
+
 
 // JS Hint Stylish Output configured
 gulp.task('jshint', () =>
