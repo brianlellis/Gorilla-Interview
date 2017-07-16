@@ -1,28 +1,33 @@
 /* File: gulpfile.js */
 
 // grab our gulp packages
-var gulp        = require('gulp'),
-    gutil       = require('gulp-util'),
-    sass        = require('gulp-sass'), // SASS compiler
-    sourcemaps  = require('gulp-sourcemaps'), // SASS sourcemap builder
-    sassdoc     = require('sassdoc'), // SASS Documentation builder
-    jsdoc       = require('gulp-jsdoc3'), // JS Documentation builder
-    cucumber    = require('gulp-cucumber'), // Automated QA feature testing
-    jshint      = require('gulp-jshint'),
-    uglify      = require('gulp-uglify'),
-    concat      = require('gulp-concat'),
-    cleanCSS    = require('gulp-clean-css'),
-    browsync    = require('browser-sync').create(), // create a browser sync instance.
-    psiNgrok    = require('psi-ngrok'), // Tunneling for PSI support
-    connect     = require('gulp-connect'),
-    port        = 8000,
-    imagemin    = require('gulp-imagemin'),
-    // Testing Harness
-    http        = require('http'),
-    kinect = require('connect'),
-    serveStatic = require('serve-static'),
-    protractor  = require("gulp-protractor").protractor,
-    reporter    = require("gulp-protractor-cucumber-html-report");
+const   gulp        = require('gulp'),
+        gutil       = require('gulp-util'),
+        sass        = require('gulp-sass'), // SASS compiler
+        sourcemaps  = require('gulp-sourcemaps'), // SASS sourcemap builder
+        sassdoc     = require('sassdoc'), // SASS Documentation builder
+        jsdoc       = require('gulp-jsdoc3'), // JS Documentation builder
+        cucumber    = require('gulp-cucumber'), // Automated QA feature testing
+        jshint      = require('gulp-jshint'),
+        uglify      = require('gulp-uglify'),
+        concat      = require('gulp-concat'),
+        cleanCSS    = require('gulp-clean-css'),
+        browsync    = require('browser-sync').create(), // create a browser sync instance.
+        psiNgrok    = require('psi-ngrok'), // Tunneling for PSI support
+        connect     = require('gulp-connect'),
+        port        = 8000,
+        imagemin    = require('gulp-imagemin'),
+        // Testing Harness
+        http        = require('http'),
+        kinect      = require('connect'),
+        Launcher    = require('webdriverio/build/lib/launcher'),
+        path        = require('path'),
+        wdio        = new Launcher(path.join(__dirname, 'wdio.conf.js')),
+        serveStatic = require('serve-static'),
+        protractor  = require("gulp-protractor").protractor,
+        reporter    = require("gulp-protractor-cucumber-html-report");
+        let httpServer;
+
 
 
 // create a default task and just log a message
@@ -102,7 +107,20 @@ gulp.task('psi', function () {
 // run tests with the following command: npm test
 gulp.task('http', (done) => {
   const app = kinect().use(serveStatic('build'));
-  http.createServer(app).listen(9000, done);
+  httpServer = http.createServer(app).listen(9000, done);
+});
+
+gulp.task('e2e', ['http'], () => {
+  return wdio.run(code => {
+    process.exit(code);
+  }, error => {
+    console.error('Launcher failed to start the test', error.stacktrace);
+    process.exit(1);
+  });
+});
+
+gulp.task('test', ['e2e'], () => {
+  httpServer.close();
 });
 
 gulp.task('cucumber', function() {
@@ -110,6 +128,7 @@ gulp.task('cucumber', function() {
         'steps': 'features/steps/steps.js'
     }));
 });
+
 
 
 // JS Hint Stylish Output configured
