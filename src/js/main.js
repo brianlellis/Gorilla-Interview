@@ -23,7 +23,7 @@ siteObjects.catalog.forEach(function (e) {
 		regPrice,specPrice,colors=[],colorData=[];
     
     // Price Checker
-	e.price.regular != undefined ? regPrice = '$'+e.price.regular+'.00' : regPrice = 'No Price Available';
+	e.price.regular != undefined ? regPrice = '$'+e.price.regular+'.00' : regPrice = '$'+e.price+'.00';
 	if (e.price.special != null) {
 		specPrice = '<span class="special">$'+e.price.special+'.00</span>';
 		regPrice = '<span class="slashed">'+regPrice+'</span>';
@@ -47,44 +47,57 @@ siteObjects.catalog.forEach(function (e) {
     
     newElement.innerHTML = '<img src="http://placehold.it/500x500" alt="'+e.name+' image" /><h3>'+e.name+'</h3><div class="rateOverlay"></div><div class="rating'+e.rating.toString().replace(".","")+'"></div><p class="price">'+regPrice+specPrice+'</p><ul class="colors">'+colors.join("")+'</ul>';
 
+    newElement.setAttribute('aria-label', e.name);
+
     document.getElementById('productGrid').appendChild(newElement);
 });
 
 /*
  * EVENT OBSERVERS
  */
-let attrEle = document.getElementsByClassName("attrItem"), 
-attrClick = function() {
-    let val = parseInt( this.innerHTML.split('<span')[0].replace( /^\D+/g, '') ), count=0;
-    document.getElementById('productGrid').classList.remove('smallProd');
+window.addEventListener('load', function() {
+    // ATTRIBUTE SELECTION
+    let attrEle = document.getElementsByClassName("attrItem"), 
+    attrClick = function() {
+        let val = parseInt( this.innerHTML.split('<span')[0].replace( /^\D+/g, '') ), count=0;
+        document.getElementById('productGrid').classList.remove('smallProd');
 
-    if ( isNaN(val) ) {
-        val = this.innerHTML.split('<span')[0].toLowerCase();
-        Array.prototype.forEach.call(document.querySelectorAll('[data-price]'), function (e) {
-            e.style.display = 'inline';
-            console.log(val);
-            if ( e.dataset.color.indexOf(val) === -1 ) { ++count; e.style.display = 'none'; }
-        });
-    } else if (val > 5) {
-        Array.prototype.forEach.call(document.querySelectorAll('[data-price]'), function (e) {
-            e.style.display = 'inline';
-            if (val === 50 && e.dataset.price > 50) {++count; e.style.display = 'none';}
-            else if (val === 100 && e.dataset.price < 100) {++count; e.style.display = 'none';}
-            else if ( val === 51 && ( e.dataset.price < 50 || e.dataset.price > 100 ) ) {++count; e.style.display = 'none';}
-        });
-    } else {
-        Array.prototype.forEach.call(document.querySelectorAll('[data-rating]'), function (e) {
-            e.style.display = 'inline';
-            if (val === 5 && e.dataset.rating < val) {++count; e.style.display = 'none';}
-            else if (val === 4 && e.dataset.rating < val) {++count; e.style.display = 'none';}
-            else if ( e.dataset.rating < val ) {++count; e.style.display = 'none';}
-        });
+        if ( isNaN(val) ) {
+            val = this.innerHTML.split('<span')[0].toLowerCase();
+            Array.prototype.forEach.call(document.querySelectorAll('[data-price]'), function (e) {
+                e.style.display = 'inline';
+                console.log(val);
+                if ( e.dataset.color.indexOf(val) === -1 ) { ++count; e.style.display = 'none'; }
+            });
+        } else if (val > 5) {
+            Array.prototype.forEach.call(document.querySelectorAll('[data-price]'), function (e) {
+                e.style.display = 'inline';
+                if (val === 50 && e.dataset.price > 50) {++count; e.style.display = 'none';}
+                else if (val === 100 && e.dataset.price < 100) {++count; e.style.display = 'none';}
+                else if ( val === 51 && ( e.dataset.price < 50 || e.dataset.price > 100 ) ) {++count; e.style.display = 'none';}
+            });
+        } else {
+            Array.prototype.forEach.call(document.querySelectorAll('[data-rating]'), function (e) {
+                e.style.display = 'inline';
+                if (val === 5 && e.dataset.rating < val) {++count; e.style.display = 'none';}
+                else if (val === 4 && e.dataset.rating < val) {++count; e.style.display = 'none';}
+                else if ( e.dataset.rating < val ) {++count; e.style.display = 'none';}
+            });
+        }
+
+        if (count === 20) document.getElementById('productGrid').classList.add('smallProd');
+        count=0;
+    };
+
+    Array.prototype.forEach.call(attrEle, function (e) {
+    	e.addEventListener('click', attrClick);
+    });
+
+    // EMAIL VALIDATOR
+    function validEmail () {
+        if ( /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test( document.getElementById('newsletterInput').value )) return true
+        console.log('bad email');
+        return;
     }
-    console.log(count);
-    if (count === 20) document.getElementById('productGrid').classList.add('smallProd');
-    count=0;
-};
-
-Array.prototype.forEach.call(attrEle, function (e) {
-	e.addEventListener('click', attrClick, false);
+    document.getElementById('newsletterButton').addEventListener('click', validEmail);
 });

@@ -214,7 +214,6 @@
                         ${ state.dataset.map(function(item, index){
                                 return `
                                     <li class="select__item ${(item === state.selected || item.value === state.selected) ? "select__item--selected" : ""}" data-index="${index}" data-value="${item.value || item.text}">
-                                        <i class="select__item_icon ${item.icon || ''}" aria-hidden="true"></i>
                                         <span class="select__item_text">${item.text || item.value}</span>
                                     </li>`;
                     }).join('') }
@@ -239,8 +238,10 @@
 }));
 
 const source = [
-    { value: 'Price' }, 
-    { value: 'Name' }
+    { value: 'Price ASC' },
+    { value: 'Price DESC' },  
+    { value: 'Name ASC' },
+    { value: 'Name DESC' }
 ];
 
 const source2 = [
@@ -251,17 +252,51 @@ const source2 = [
 ];
 
 const select1 = new Select({
-      placeholder: 'Default',
+      placeholder: 'Name ASC',
       dataset: source,
       noResults: 'No results found',
-      onSelected: item => item
+      onSelected: function (item) {
+            if (item.value.indexOf('Price') !== -1) {
+                var classname = document.getElementsByClassName('product');
+                var divs = [];
+                for (var i = 0; i < classname.length; ++i) {
+                    divs.push(classname[i]);
+                }
+                divs.sort(function(a, b) {
+                    if (item.value.indexOf('ASC') !== -1) return parseInt(a.dataset.price) - parseInt(b.dataset.price);
+                    else return parseInt(b.dataset.price) - parseInt(a.dataset.price);
+                });
+
+                document.getElementById('productGrid').innerHTML = null;
+
+                divs.forEach(function(el) {
+                    document.getElementById('productGrid').appendChild(el);
+                });
+            } else {
+                var classname = document.getElementsByClassName('product');
+                var divs = [];
+                for (var i = 0; i < classname.length; ++i) {
+                    divs.push(classname[i]);
+                }
+                divs.sort(function(a, b) {
+                    if (item.value.indexOf('ASC') !== -1) return a.getAttribute("aria-label").localeCompare(b.getAttribute("aria-label"));
+                    else return b.getAttribute("aria-label").localeCompare(a.getAttribute("aria-label"));
+                });
+
+                document.getElementById('productGrid').innerHTML = null;
+
+                divs.forEach(function(el) {
+                    document.getElementById('productGrid').appendChild(el);
+                });
+            }
+        }
         }).componentMount({
       el: document.getElementById('positionDropdown')
 });
 
 const select2 = new Select({
       placeholder: '15',
-      dataset: source,
+      dataset: source2,
       noResults: 'No results found',
       onSelected: item => item
         }).componentMount({

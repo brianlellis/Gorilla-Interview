@@ -4,11 +4,11 @@ let siteObjects = {
         "category" : "By Price",
         "filters" : [{
             "name" : "Equal or Less than $50",
-            "results" : 4,
+            "results" : 6,
             "url" : "/filter/attribute/1"
         },{
             "name" : "Within $51-$100",
-            "results" : 16,
+            "results" : 14,
             "url" : "/filter/attribute/2"
         },{
             "name" : "More than $100",
@@ -113,7 +113,7 @@ let siteObjects = {
             "id": "762",
             "sku": "14WPN7BR",
             "price": {
-                "regular": 75,
+                "regular": 82,
                 "special": 49.99
             },
             "img": "http://placehold.it/500x500",
@@ -139,7 +139,7 @@ let siteObjects = {
             "id": "775",
             "sku": "13HCS7J",
             "price": {
-                "regular": 75,
+                "regular": 93,
                 "special": null
             },
             "img": "http://placehold.it/500x500",
@@ -173,7 +173,7 @@ let siteObjects = {
             "id": "776",
             "sku": "13HCS7EL",
             "price": {
-                "regular": 80,
+                "regular": 55,
                 "special": null
             },
             "img": "http://placehold.it/500x500",
@@ -199,7 +199,7 @@ let siteObjects = {
             "id": "777",
             "sku": "13HCS7CR",
             "price": {
-                "regular": 70,
+                "regular": 62,
                 "special": null
             },
             "img": "http://placehold.it/500x500",
@@ -229,7 +229,7 @@ let siteObjects = {
             "id": "778",
             "sku": "13HCS7B",
             "price": {
-                "regular": 160,
+                "regular": 189,
                 "special": null
             },
             "img": "http://placehold.it/500x500",
@@ -256,7 +256,7 @@ let siteObjects = {
             "id": "801",
             "sku": "14WPN7TC",
             "price": {
-                "regular": 75,
+                "regular": 87,
                 "special": null
             },
             "img": "http://placehold.it/500x500",
@@ -282,7 +282,7 @@ let siteObjects = {
             "id": "802",
             "sku": "14WPN7RC",
             "price": {
-                "regular": 75,
+                "regular": 20,
                 "special": null
             },
             "img": "http://placehold.it/500x500",
@@ -308,7 +308,7 @@ let siteObjects = {
             "id": "806",
             "sku": "14WPN7SV",
             "price": {
-                "regular": 75,
+                "regular": 35,
                 "special": null
             },
             "img": "http://placehold.it/500x500",
@@ -335,7 +335,7 @@ let siteObjects = {
             "id": "809",
             "sku": "14WPN7PE",
             "price": {
-                "regular": 75,
+                "regular": 54,
                 "special": null
             },
             "img": "http://placehold.it/500x500",
@@ -388,9 +388,9 @@ let siteObjects = {
         },
         {
             "name": "Product Title 12",
-            "id": "761",
+            "id": "980",
             "sku": "14WPN7BW",
-            "price": 75,
+            "price": 97,
             "subtotal": 75,
             "img": "http://placehold.it/500x500",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget eros eu felis aliquet elementum. Proin vel mauris tincidunt, condimentum nisi in, pretium sapien. Proin augue ligula, euismod eu elementum non, sagittis sed leo. Nunc interdum eros non tellus interdum laoreet.",
@@ -420,10 +420,10 @@ let siteObjects = {
         },
         {
             "name": "Product Title 13",
-            "id": "762",
+            "id": "981",
             "sku": "14WPN7BR",
             "price": {
-                "regular": 75,
+                "regular": 36,
                 "special": 49.99
             },
             "img": "http://placehold.it/500x500",
@@ -446,10 +446,10 @@ let siteObjects = {
         },
         {
             "name": "Product Title 14",
-            "id": "775",
+            "id": "982",
             "sku": "13HCS7J",
             "price": {
-                "regular": 75,
+                "regular": 69,
                 "special": null
             },
             "img": "http://placehold.it/500x500",
@@ -469,7 +469,7 @@ let siteObjects = {
         },
         {
             "name": "Product Title 15",
-            "id": "776",
+            "id": "983",
             "sku": "13HCS7EL",
             "price": {
                 "regular": 80,
@@ -495,7 +495,7 @@ let siteObjects = {
         },
         {
             "name": "Product Title 16",
-            "id": "777",
+            "id": "984",
             "sku": "13HCS7CR",
             "price": {
                 "regular": 70,
@@ -525,7 +525,7 @@ let siteObjects = {
         },
         {
             "name": "Product Title 17",
-            "id": "778",
+            "id": "985",
             "sku": "13HCS7B",
             "price": {
                 "regular": 160,
@@ -551,10 +551,10 @@ let siteObjects = {
         },
         {
             "name": "Product Title 18",
-            "id": "801",
+            "id": "986",
             "sku": "14WPN7TC",
             "price": {
-                "regular": 75,
+                "regular": 65,
                 "special": null
             },
             "img": "http://placehold.it/500x500",
@@ -578,10 +578,10 @@ let siteObjects = {
         },
         {
             "name": "Product Title 19",
-            "id": "802",
+            "id": "987",
             "sku": "14WPN7RC",
             "price": {
-                "regular": 75,
+                "regular": 52,
                 "special": null
             },
             "img": "http://placehold.it/500x500",
@@ -608,7 +608,7 @@ let siteObjects = {
         },
         {
             "name": "Product Title 20",
-            "id": "806",
+            "id": "988",
             "sku": "14WPN7SV",
             "price": {
                 "regular": 75,
@@ -635,10 +635,10 @@ let siteObjects = {
         },
         {
             "name": "Product Title 21",
-            "id": "809",
+            "id": "989",
             "sku": "14WPN7PE",
             "price": {
-                "regular": 75,
+                "regular": 47,
                 "special": null
             },
             "img": "http://placehold.it/500x500",
@@ -669,10 +669,10 @@ let siteObjects = {
         },
         {
             "name": "Product Title 22",
-            "id": "837",
+            "id": "990",
             "sku": "14WPN7BJ",
             "price": {
-                "regular": 75,
+                "regular": 19,
                 "special": null
             },
             "img": "http://placehold.it/500x500",
