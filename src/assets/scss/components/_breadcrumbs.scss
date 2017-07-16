@@ -1,0 +1,11 @@
+#breadcrumbs {
+	font-size: 12px;
+	.crumb { 
+		margin-right: 10px;
+		&::after {
+		    content: "/";
+		    margin-left: 10px;
+		} 
+	}
+	.lastCrumb { color: #ccc; }
+}

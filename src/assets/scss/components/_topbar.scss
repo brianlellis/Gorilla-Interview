@@ -1,0 +1,24 @@
+#gridViewSel {
+	list-style: none;
+	margin-right: 25px;
+	margin-top: 7px;
+	float: left;
+	padding: 0;
+	li { 
+		float: left; 
+		margin-right: 10px;
+		&.selected { opacity: 0.2 } 
+	}
+}
+#positionDropdown,
+#viewDropdown,
+#gridViewAmount { display: inline-block; }
+
+#positionDropdown{
+	margin-right: 35px;
+	&::before { content: 'Sort'; margin-right: 10px }
+}
+#viewDropdown {
+	margin-right: 10px;
+	&::before { content: 'Show'; margin-right: 10px }
+}
