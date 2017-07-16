@@ -2,13 +2,14 @@
 .select__toolbox {
    cursor: pointer;
    padding: .25em .5em;
-   border-radius: 5px;
-   border: 1px solid #2d8682
+   padding-right: 1.5em;
+   border-radius: 3px;
+   border: 1px solid #000
 }
 .select__label {
    height: 25px;
    line-height: 25px;
-   margin-right: 45px
+   margin-right: 45px;
 }
 .select__arrow {
    position: absolute;
@@ -17,18 +18,23 @@
    right: 0;
    bottom: 0;
    text-align: center;
-   width: 30px;
+   width: 40px;
    border-radius: 0 5px 5px 0;
    color: #2d2d2d;
    border-left: 1px solid #000;
    height: 100%;
    &:before {
-      content: '›';
-      transform: rotate(90deg);
-      font-size: 30px;
-      position: relative;
-      margin: -1px 0 0 10px;
-      float: left
+      content: '';
+      width: 0; 
+      height: 0; 
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 7px solid #000;
+      position: absolute;
+      top: 15px;
+      right: 0;
+      left: 0;
+      margin: auto;
    }
 }
 

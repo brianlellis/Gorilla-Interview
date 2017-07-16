@@ -298,7 +298,15 @@ const select2 = new Select({
       placeholder: '15',
       dataset: source2,
       noResults: 'No results found',
-      onSelected: item => item
+      onSelected: function (item) {
+        var ele = document.getElementById('productGrid');
+            switch (item.value) {
+                case '12': ele.className = 'prodLimit12'; break;
+                case '15': ele.className = 'prodLimit15'; break;
+                case '18': ele.className = 'prodLimit18'; break;
+                case '21': ele.className = 'prodLimit21'; break;
+            }
+        }
         }).componentMount({
       el: document.getElementById('viewDropdown')
 });

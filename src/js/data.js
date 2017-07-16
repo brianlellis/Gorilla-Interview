@@ -8,11 +8,11 @@ let siteObjects = {
             "url" : "/filter/attribute/1"
         },{
             "name" : "Within $51-$100",
-            "results" : 14,
+            "results" : 13,
             "url" : "/filter/attribute/2"
         },{
             "name" : "More than $100",
-            "results" : 2,
+            "results" : 3,
             "url" : "/filter/attribute/3"
         }]
     },{
@@ -199,7 +199,7 @@ let siteObjects = {
             "id": "777",
             "sku": "13HCS7CR",
             "price": {
-                "regular": 62,
+                "regular": 101,
                 "special": null
             },
             "img": "http://placehold.it/500x500",
