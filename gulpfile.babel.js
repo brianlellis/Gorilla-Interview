@@ -65,10 +65,22 @@ gulp.task('sass-styles', () => {
 gulp.task('sassdoc', () => {
   var options = {
     dest: 'build/sassdoc',
+    verbose: true,
+    display: {
+      access: ['public', 'private'],
+      alias: true,
+      watermark: true,
+    },
+    groups: {
+      'undefined': 'Ungrouped',
+      foo: 'Foo group',
+      bar: 'Bar group',
+    },
+    basePath: 'https://github.com/SassDoc/sassdoc',
   };
 
-  return gulp.src('src/assests/scss/**/*.scss')
-    .pipe( sassdoc(options) );
+
+  return gulp.src('./src/assets/scss/**/*.scss').pipe( sassdoc(options) );
 });
 
 // SASS watch task
@@ -81,8 +93,9 @@ gulp.task('sass-compile',['sass-styles', 'sassdoc']);
 
 // JSDoc compilation
 gulp.task('jsdoc', cb => {
-    gulp.src(['README.md', 'src/js/**/*.js'], {read: false})
-        .pipe(jsdoc(require('./jsdocConfig.json'), cb));
+    const config = require('./jsdocConfig.json')
+    gulp.src(['README.md', 'src/js/*.js'], {read: false})
+        .pipe(jsdoc(config), cb);
 });
 
 // PSI Score Retrieval
@@ -154,12 +167,10 @@ gulp.task('jshint', () =>
         .pipe(jshint.reporter('jshint-stylish'))
 );
 
-// JS Build watch task
 gulp.task('js-compile', () => {
-    gulp.src('src/assets/js/**/*.js')
-        .pipe(uglify())
+    gulp.src('src/js/*.js')
         .pipe(concat('compiledJS.js'))
-        .pipe(gulp.dest('src/js/'));
+        .pipe(gulp.dest('build'));
 });
 
 // Image optimization task

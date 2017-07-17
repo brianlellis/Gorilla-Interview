@@ -19,11 +19,12 @@
 		height: 405px;
 		margin-top: 60px;
 
-		img { width: 100%; border: 1px solid #e1e1e1; }
+		img { width: 100%; border: 1px solid $c-gray2; }
 		h3 { margin: 10px 0 12px 0 }
 
 		.price {
 			margin-top: 22px;
+			font-weight: $font-weight-light;
 			.slashed { text-decoration: line-through }
 			.special {
 				color: #b91919;

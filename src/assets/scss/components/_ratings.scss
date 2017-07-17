@@ -1,11 +1,12 @@
 div[class^="rating"] {
-  width: 80px;
+  width: 90px;
   overflow: hidden;
   position: absolute;
-  margin-top: -22px;
+  margin-top: -33px;
   &::after {
      content: "\2605 \2605 \2605 \2605 \2605";
-     color: #000;
+     color: $c-black;
+     font-size: $font-size-xl;
   }
 }
 
@@ -13,16 +14,17 @@ div[class^="rating"] {
   .rateOverlay {
     &::after {
        content: "\2605 \2605 \2605 \2605 \2605";
-       color: #ccc;
+       color: $c-gray;
+       font-size: $font-size-xl;
     }
   }
-  .rating1 { width: 16px }
-  .rating15 { width: 24px }
-  .rating2 { width: 32px }
-  .rating25 { width: 40px }
-  .rating3 { width: 48px }
-  .rating35 { width: 56px }
-  .rating4 { width: 64px }
-  .rating45 { width: 72px }
-  .rating5 { width: 80px }
+  .rating1 { width: 18px }
+  .rating15 { width: 27px }
+  .rating2 { width: 36px }
+  .rating25 { width: 45px }
+  .rating3 { width: 54px }
+  .rating35 { width: 63px }
+  .rating4 { width: 72px }
+  .rating45 { width: 81px }
+  .rating5 { width: 90px }
 }

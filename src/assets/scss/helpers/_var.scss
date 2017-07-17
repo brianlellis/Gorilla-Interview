@@ -1,0 +1,76 @@
+////
+/// @author Brian L. Ellis
+/// @group Variables
+////
+
+/// @prop {variable} $font-size-sm [12px]
+/// @prop {variable} $font-size [14px]
+/// @prop {variable} $font-size-m [16px]
+/// @prop {variable} $font-size-l [18px]
+/// @prop {variable} $font-size-xl [24px]
+/// @prop {variable} $font-size-xxl [30px]
+/// @name Font Sizes
+$font-size-sm: 12px;
+$font-size: 14px;
+$font-size-m: 16px;
+$font-size-l: 18px;
+$font-size-xl: 24px;
+$font-size-xxl: 30px;
+
+/// @prop {variable} $font-weight-feather [100]
+/// @prop {variable} $font-weight-light [300]
+/// @prop {variable} $font-weight [400]
+/// @prop {variable} $font-weight-med [600]
+/// @prop {variable} $font-weight-bold [900]
+/// @name Font Weights
+$font-weight-feather: 100;
+$font-weight-light: 300;
+$font-weight: 400;
+$font-weight-med: 600;
+$font-weight-bold: 900;
+
+/// @prop {color} $c-orange [#e86d20]
+/// @prop {Color} $c-charcoal [#252525]
+/// @prop {Color} $c-gray [#CCC]
+/// @prop {Color} $c-gray2 [#e1e1e1]
+/// @prop {Color} $c-white [#FFF]
+/// @prop {Color} $c-white [#000]
+/// @name Colors
+$c-orange: #e86d20;
+$c-charcoal: #252525;
+$c-gray: #CCC;
+$c-gray2: #e1e1e1;
+$c-white: #FFF;
+$c-black: #000;
+
+
+$border-rad: 2px;
+
+/// @name assume min-width (by default) if only a number
+/// @group breakpoints
+/// @example
+/// breakpoint($min) {
+///     content: 'Whoa.';
+///   }
+*{}
+/// @name set min-width/max-width if both values are numbers
+/// @group breakpoints
+/// @example
+/// breakpoint($min $max) {
+///     content: 'Whoa.';
+///   }
+*{}
+/// @name if one value is a string, assume a feature/value pair
+/// @group breakpoints
+/// @example
+/// breakpoint(max-width 1000px) {
+///     content: 'Whoa.';
+///   }
+*{}
+/// @name string tests together within parentheses, assume each item is a feature value pair
+/// @group breakpoints
+/// @example
+/// breakpoint( (min-height 1000px) (orientation portrait) ) {
+///     content: 'Whoa.';
+///   }
+*{}

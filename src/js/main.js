@@ -1,6 +1,10 @@
-/*
- * ATTRIBUTES SIDEBAR
- */
+/**
+* This function does something see example below:
+*
+* var x = foo("test"); //it will show "test" message
+*
+* @param {string} str: string argumnet that will be shown in message
+*/
 siteObjects.facets.forEach(function (e) {
 	let newElement = document.createElement('li'), attrList=[];
 
@@ -10,7 +14,7 @@ siteObjects.facets.forEach(function (e) {
 	});
 
     newElement.className = "attrSection"; 
-    newElement.innerHTML = '<h3>'+e.category+'</h3><ul class="attrListContainer">'+attrList.join("")+'</ul>';
+    newElement.innerHTML = '<h3>'+e.category+':</h3><ul class="attrListContainer">'+attrList.join("")+'</ul>';
 
     document.getElementById('attrList').appendChild(newElement);
 });

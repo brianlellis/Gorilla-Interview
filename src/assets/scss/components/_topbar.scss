@@ -22,3 +22,5 @@
 	margin-right: 10px;
 	&::before { content: 'Show'; margin-right: 10px }
 }
+
+#gridViewAmount { font-weight: $font-weight-feather; font-size: $font-size }

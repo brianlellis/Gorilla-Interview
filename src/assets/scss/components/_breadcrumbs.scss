@@ -1,5 +1,12 @@
+////
+/// @author Brian L. Ellis
+/// @group Components
+////
+
+/// @name Catalog Breadcrumbs
+//// #breadcrumbs
 #breadcrumbs {
-	font-size: 12px;
+	font-size: $font-size-sm;
 	padding-left: 115px;
 	.crumb { 
 		margin-right: 10px;
@@ -8,5 +15,5 @@
 		    margin-left: 10px;
 		} 
 	}
-	.lastCrumb { color: #ccc; }
+	.lastCrumb { color: $c-gray; }
 }

@@ -1,6 +1,6 @@
 #masthead {
 	height: 120px;
-	border-bottom: 1px solid #e1e1e1;
+	border-bottom: 1px solid $c-gray2;
 	margin-bottom: 30px;
 	padding: 0 8.25%;
 	.logo {
@@ -20,7 +20,7 @@
 			color: black;
 			text-decoration: none;
 			font-weight: 700;
-			font-size: 18px;
+			font-size: $font-size-l;
 			font-family: sans-serif;
 			margin-right: 65px;
 			cursor: pointer;

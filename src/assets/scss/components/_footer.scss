@@ -1,46 +1,45 @@
 #footer {
-	background-color: #252525;
-	h4 { color: #e86d20; margin: 0; margin-bottom: 20px; }
+	background-color: $c-charcoal;
+	h4 { color: $c-orange; margin: 0; margin-bottom: 20px; }
 	a {
 		display: block;
-		color: #FFF;
+		color: $c-gray;
 		text-decoration: none;
-		font-weight: 300;
-		font-size: 16px;
-		font-family: sans-serif;
-		line-height: 1.5;
+		font-weight: $font-weight-feather;
+		font-size: $font-size;
+		line-height: 1.75;
     }
     .topFooter { 
 		padding: 60px 0;
 		div { 
-			width: 24.5%; 
+			width: 25.66%; 
 			display: inline-block; 
 			margin: 0;
 			height: 160px;
 			float: left;
-			&:last-child { display: inline-block; float: none; }
+			&:last-child { display: inline-block; float: none; width: 23% }
 		}
 		#newsletterInput {
 			background: transparent;
 		    margin-top: 20px;
-		    width: 83%;
+		    width: 100%;
 		    box-sizing: border-box;
-		    border: 1px solid #FFF;
-		    border-radius: 2px;
-		    font-size: 16px;
-		    color: #FFF;
+		    border: 1px solid $c-white;
+		    border-radius: $border-rad;
+		    font-size: $font-size-m;
+		    color: $c-white;
 		    background-position: 240px 10px; 
 		    background-repeat: no-repeat;
 		    padding: 15px 20px 15px 15px;
-		    font-weight: 300px;
+		    font-weight: $font-weight-light;
 		}
 		#newsletterButton {
-			background-color: #e86d20;
+			background-color: $c-orange;
 			border: 0;
-			color: #FFF;
-			font-weight: 300;
+			color: $c-white;
+			font-weight: $font-weight-light;
 			text-align: center;
-			width: 83%;
+			width: 100%;
 			line-height: 50px;
 			margin-top: 20px;
 		}
@@ -49,12 +48,13 @@
 	.bottomFooter {
 		padding: 45px 0;
 		border-top: 1px solid #363636; 
+		margin-top: 30px;
 		*, address { 
-			color: #FFF;
+			color: $c-gray;
 			font-style: initial;
-			font-weight: 300;
+			font-weight: $font-weight-light;
 			text-decoration: none;
-			font-size: 12px;
+			font-size: $font-size-sm;
 		}
 		.copyright, address { width: 33.33%; display: inline-block; margin: 0 }
 		#backToTop { float: right; }

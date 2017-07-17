@@ -1,6 +1,13 @@
+////
+/// @author Brian L. Ellis
+/// @group Components
+////
+
+/// @name Account Top Bar
+//// #account-bar
 #account-bar {
 	width: 100%;
-	background-color: #252525;
+	background-color: $c-charcoal;
 	height: 42px;
 	margin-bottom: 40px;
 }
