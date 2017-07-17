@@ -1,15 +1,6 @@
-/*
-    JavaScript autoComplete v1.0.4
-    Copyright (c) 2014 Simon Steinberger / Pixabay
-    GitHub: https://github.com/Pixabay/JavaScript-autoComplete
-    License: http://www.opensource.org/licenses/mit-license.php
-*/
-
-var autoComplete = (function(){
+SiteCore.autoComplete = (function(){
     // "use strict";
     function autoComplete(options){
-        if (!document.querySelector) return;
-
         // helpers
         function hasClass(el, className){ return el.classList ? el.classList.contains(className) : new RegExp('\\b'+ className+'\\b').test(el.className); }
 
@@ -212,21 +203,12 @@ var autoComplete = (function(){
     return autoComplete;
 })();
 
-(function(){
-    if (typeof define === 'function' && define.amd)
-        define('autoComplete', function () { return autoComplete; });
-    else if (typeof module !== 'undefined' && module.exports)
-        module.exports = autoComplete;
-    else
-        window.autoComplete = autoComplete;
-})();
-
-new autoComplete({
+new SiteCore.autoComplete({
     selector: '#searchInput',
     minChars: 2,
     source: function(term, suggest){
         term = term.toLowerCase();
-        var choices = siteObjects.catalog.map(function (v) { return v.name });
+        var choices = SiteCore.siteObjects.catalog.map(function (v) { return v.name });
         var matches = [];
         for (i=0; i<choices.length; i++)
             if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);

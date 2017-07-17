@@ -3,6 +3,7 @@
 	border-bottom: 1px solid $c-gray2;
 	margin-bottom: 30px;
 	padding: 0 8.25%;
+	position: relative;
 	.logo {
 		float: left;
 		margin: 0;
@@ -28,5 +29,32 @@
 				opacity: 0.7;
 			}
 	    }
+	}
+
+	#minicart {
+		float: right;
+	    position: absolute;
+	    background: #000;
+	    color: #FFF;
+	    z-index: 99;
+	    height: 0;
+	    right: -60px;
+	    width: 150px;
+	    top: 62px;
+	    text-align: center;
+	    height: 0;
+	    transition: height 300ms;
+	    cursor: pointer;
+	    &.active { 
+	    	height: 130px; opacity: 1;
+	    	&::before {
+	    		right: 74px;
+	    	} 
+	    }
+		&::before { 
+			content: '';
+			position: absolute;
+			top: -30px;
+		}
 	}
 }

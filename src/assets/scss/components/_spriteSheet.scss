@@ -1,42 +1,78 @@
+.spriteUpArrow,
+#backToTop:after {
+	background: url('../images/spritesheet.png') no-repeat -242px -1px;
+	background-size: 262px 23px;
+	width: 20px;
+	height: 20px;
+}
+.spriteHorizArrow,
+.customerInfo span::after,
+#gridPageCount::before,
+#gridPageCount::after {
+	background: url('../images/spritesheet.png') no-repeat -210px -1px;
+	background-size: 262px 23px;
+	width: 11px;
+	height: 20px;
+}
+.spriteX,
+.attrSel::after {
+	background: url('../images/spritesheet.png') no-repeat -183px -1px;
+	background-size: 262px 23px;
+	width: 20px;
+	height: 24px;
+}
+.spriteMagnify {
+	background: url('../images/spritesheet.png') no-repeat -179px -1px;
+	background-size: 262px 23px;
+	width: 20px;
+	height: 20px;
+}
 .spriteYoutube {
-	background: url('../images/spritesheet.png') no-repeat -123px 0;
-	background-size: 152px 20px;
-	width: 29px;
+	background: url('../images/spritesheet.png') no-repeat -138px -1px;
+	background-size: 262px 23px;
+	width: 26px;
 	height: 20px;
 }
 .spriteInstagram {
-	background: url('../images/spritesheet.png') no-repeat -102px 0;
-	background-size: 152px 20px;
+	background: url('../images/spritesheet.png') no-repeat -115px -1px;
+	background-size: 262px 23px;
 	width: 21px;
 	height: 20px;
 }
+.spritePinterest {
+	background: url('../images/spritesheet.png') no-repeat -246px -1px;
+	background-size: 262px 23px;
+	width: 13px;
+	height: 20px;
+}
 .spriteFacebook {
-	background: url('../images/spritesheet.png') no-repeat -91px 0;
-	background-size: 152px 20px;
+	background: url('../images/spritesheet.png') no-repeat -98px -1px;
+	background-size: 262px 23px;
 	width: 10px;
 	height: 20px;
 }
 .spriteTwitter {
-	background: url('../images/spritesheet.png') no-repeat -65px 0;
-	background-size: 152px 20px;
+	background: url('../images/spritesheet.png') no-repeat -70px -1px;
+	background-size: 262px 23px;
 	width: 25px;
 	height: 20px;
 }
 .spriteGrid {
-	background: url('../images/spritesheet.png') no-repeat -44px 0;
-	background-size: 152px 20px;
-	width: 20px;
-	height: 20px;
+	background: url('../images/spritesheet.png') no-repeat -46px -1px;
+	background-size: 270px 23px;
+	width: 23px;
+	height: 22px;
 }
 .spriteRows {
-	background: url('../images/spritesheet.png') no-repeat -23px 0;
-	background-size: 152px 20px;
-	width: 20px;
-	height: 20px;
+	background: url('../images/spritesheet.png') no-repeat -24px -1px;
+	background-size: 270px 23px;
+	width: 24px;
+	height: 22px;
 }
-.spriteCart {
-	background: url('../images/spritesheet.png') no-repeat 0 0;
-	background-size: 152px 20px;
+.spriteCart,
+#minicart::before {
+	background: url('../images/spritesheet.png') no-repeat 0 -1px;
+	background-size: 262px 20px;
 	width: 23px;
-	height: 20px;
+	height: 22px;
 }

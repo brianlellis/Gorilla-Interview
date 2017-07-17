@@ -1,28 +1,24 @@
-/**
-* This function does something see example below:
-*
-* var x = foo("test"); //it will show "test" message
-*
-* @param {string} str: string argumnet that will be shown in message
-*/
-siteObjects.facets.forEach(function (e) {
-	let newElement = document.createElement('li'), attrList=[];
+SiteCore.siteObjects.facets.forEach(e => {
+	let newElement = document.createElement('li'), newEle = document.createElement('li'), attrList=[], selList=[], selEle;
 
 	// Attr Aggregator
-	e.filters.forEach(function (v) {
+	e.filters.forEach(v => {
 		attrList.push('<li class="attrItem">'+v.name+'<span class="results">('+v.results+')</span></li>');
+        selList.push('<li class="attrSel">'+v.name+'</li>');
 	});
 
+    selEle               = '<ul>'+selList.join("")+'</ul>';
     newElement.className = "attrSection"; 
     newElement.innerHTML = '<h3>'+e.category+':</h3><ul class="attrListContainer">'+attrList.join("")+'</ul>';
-
+    newEle.innerHTML     = selEle; 
     document.getElementById('attrList').appendChild(newElement);
+    document.getElementById('selectedAttr').appendChild(newEle);
 });
 
 /*
  * CATALOG GRID
  */
-siteObjects.catalog.forEach(function (e) {
+SiteCore.siteObjects.catalog.forEach(e => {
 	let newElement = document.createElement('li'),
 		regPrice,specPrice,colors=[],colorData=[];
     
@@ -34,7 +30,7 @@ siteObjects.catalog.forEach(function (e) {
 	} else { specPrice = '' }
 
 	// Color Checker
-	e.colors.forEach(function (v,i) {
+	e.colors.forEach((v,i) => {
         colorData.push( v.name.toLowerCase() );
 		colors.push('<li class="swatch '+v.name.toLowerCase()+'" style="background-color:'+v.code+'"></li>');
 	});
@@ -47,10 +43,8 @@ siteObjects.catalog.forEach(function (e) {
     else if (e.price.special !== null) newElement.dataset.price = e.price.special;
     else newElement.dataset.price = e.price.regular;
 
-    newElement.dataset.rating = e.rating;
-    
+    newElement.dataset.rating = e.rating;  
     newElement.innerHTML = '<img src="http://placehold.it/500x500" alt="'+e.name+' image" /><h3>'+e.name+'</h3><div class="rateOverlay"></div><div class="rating'+e.rating.toString().replace(".","")+'"></div><p class="price">'+regPrice+specPrice+'</p><ul class="colors">'+colors.join("")+'</ul>';
-
     newElement.setAttribute('aria-label', e.name);
 
     document.getElementById('productGrid').appendChild(newElement);
@@ -59,29 +53,28 @@ siteObjects.catalog.forEach(function (e) {
 /*
  * EVENT OBSERVERS
  */
-window.addEventListener('load', function() {
+window.addEventListener('load', ()=> {
     // ATTRIBUTE SELECTION
     let attrEle = document.getElementsByClassName("attrItem"), 
-    attrClick = function() {
+    attrClick = function(e){
         let val = parseInt( this.innerHTML.split('<span')[0].replace( /^\D+/g, '') ), count=0;
         document.getElementById('productGrid').classList.remove('smallProd');
 
         if ( isNaN(val) ) {
             val = this.innerHTML.split('<span')[0].toLowerCase();
-            Array.prototype.forEach.call(document.querySelectorAll('[data-price]'), function (e) {
+            Array.prototype.forEach.call(document.querySelectorAll('[data-price]'), e => {
                 e.style.display = 'inline';
-                console.log(val);
                 if ( e.dataset.color.indexOf(val) === -1 ) { ++count; e.style.display = 'none'; }
             });
         } else if (val > 5) {
-            Array.prototype.forEach.call(document.querySelectorAll('[data-price]'), function (e) {
+            Array.prototype.forEach.call(document.querySelectorAll('[data-price]'), e => {
                 e.style.display = 'inline';
                 if (val === 50 && e.dataset.price > 50) {++count; e.style.display = 'none';}
                 else if (val === 100 && e.dataset.price < 100) {++count; e.style.display = 'none';}
                 else if ( val === 51 && ( e.dataset.price < 50 || e.dataset.price > 100 ) ) {++count; e.style.display = 'none';}
             });
         } else {
-            Array.prototype.forEach.call(document.querySelectorAll('[data-rating]'), function (e) {
+            Array.prototype.forEach.call(document.querySelectorAll('[data-rating]'), e => {
                 e.style.display = 'inline';
                 if (val === 5 && e.dataset.rating < val) {++count; e.style.display = 'none';}
                 else if (val === 4 && e.dataset.rating < val) {++count; e.style.display = 'none';}
@@ -91,10 +84,30 @@ window.addEventListener('load', function() {
 
         if (count === 20) document.getElementById('productGrid').classList.add('smallProd');
         count=0;
+
+        // Show attribute
+        document.getElementById('selectedAttr').classList.add('active');
+        document.getElementsByClassName('attrSel')[e.target.dataset.index].classList.toggle('active');
+    },
+    attrSelClick = function (e) {
+        e.target.classList.remove('active');
+        if (document.querySelectorAll('#selectedAttr .attrSel.active').length < 1) document.getElementById('selectedAttr').classList.remove('active');
     };
 
-    Array.prototype.forEach.call(attrEle, function (e) {
+    // ATTRIBUTES LIST
+    Array.prototype.forEach.call(attrEle, (e,i) => {
+        e.dataset.index = i;
     	e.addEventListener('click', attrClick);
+    });
+
+    // ACTIVE ATTRIBUTES
+    Array.prototype.forEach.call(document.getElementsByClassName("attrSel"), (e,i) => {
+        e.addEventListener('click', attrSelClick);
+    });
+
+    // MINICART CLICK
+    document.getElementById('minicart').addEventListener('click', e=> {
+        e.target.classList.toggle('active');
     });
 
     // EMAIL VALIDATOR

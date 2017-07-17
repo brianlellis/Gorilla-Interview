@@ -1,85 +1,64 @@
-let siteObjects = {
+let SiteCore={};
+SiteCore.siteObjects = {
     "facets" : [
         {
         "category" : "By Price",
         "filters" : [{
             "name" : "Equal or Less than $50",
-            "results" : 6,
-            "url" : "/filter/attribute/1"
+            "results" : 6
         },{
             "name" : "Within $51-$100",
-            "results" : 13,
-            "url" : "/filter/attribute/2"
+            "results" : 13
         },{
             "name" : "More than $100",
-            "results" : 3,
-            "url" : "/filter/attribute/3"
+            "results" : 3
         }]
     },{
         "category" : "By Color",
         "filters" : [
             {
                 "name" : "Purple",
-                "results" : 19,
-                "url" : "/filter/attribute/1"
+                "results" : 19
             },{
                 "name" : "Blue",
-                "results" : 14,
-                "url" : "/filter/attribute/1"
+                "results" : 14
             },{
                 "name" : "Green",
-                "results" : 12,
-                "url" : "/filter/attribute/2"
+                "results" : 12
             },{
                 "name" : "Pink",
-                "results" : 13,
-                "url" : "/filter/attribute/3"
+                "results" : 13
             },{
                 "name" : "Orange",
-                "results" : 19,
-                "url" : "/filter/attribute/4"
+                "results" : 19
             }
         ]
     },{
         "category" : "By Rating",
         "filters" : [{
             "name" : "5 Stars",
-            "results" : 2,
-            "url" : "/filter/attribute/1"
+            "results" : 2
         },{
             "name" : "4 Stars and Above",
-            "results" : 20,
-            "url" : "/filter/attribute/2"
+            "results" : 20        
         },{
             "name" : "3 Stars and Above",
-            "results" : 22,
-            "url" : "/filter/attribute/3"
+            "results" : 22        
         },{
             "name" : "2 Stars and Above",
-            "results" : 22,
-            "url" : "/filter/attribute/4"
+            "results" : 22        
         }]
     }],
-    "activeFacets" : [],
-
     "topControls" : {
-        "views" : [{
-            "name" : "grid",
-            "url"  : "/view/grid"
-        },{
-            "name" : "list",
-            "url"  : "/view/list"
-        }],
-        "sorting" : [{
-            "name" : "Position",
-            "url"  : "/sort/position"
-        },{
-            "name" : "Price Asc.",
-            "url"  : "/sort/price/asc"
-        },{
-            "name" : "Price Desc.",
-            "url"  : "/sort/price/desc"
-        }],
+        "views" : [
+            {"name" : "grid"},
+            {"name" : "list"}
+        ],
+        "sorting" : [
+            {"name" : "Position"},
+            {"name" : "Price Asc."},
+            {"name" : "Price Desc."}
+        ],
         "productsShown": [12,18,24,46, 120]
     },
 

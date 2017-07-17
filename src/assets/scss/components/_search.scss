@@ -1,17 +1,17 @@
 #searchInput {
     margin-top: 20px;
+    margin-right: -4%;
     width: 285px;
     box-sizing: border-box;
     border: 1px solid $c-gray;
     border-radius: $border-rad;
     font-size: $font-size-m;
     background-color: $c-white;
-    background-image: url('https://www.w3schools.com/howto/searchicon.png');
-    background-position: 240px 10px; 
-    background-repeat: no-repeat;
     padding: 15px 20px 15px 15px;
     font-weight: $font-weight-light;
     float: right;
+    background-size: 11px 10px;
+    background: url("../images/magnify.png") no-repeat 246px 12px;
 }
 
 /*

@@ -10,4 +10,25 @@
 	background-color: $c-charcoal;
 	height: 42px;
 	margin-bottom: 40px;
+
+	.customerInfo {
+	    float: right;
+	    color: #FFF;
+	    line-height: 40px;
+	    margin-right: 14%;
+	    width: 260px;
+	    span { 
+	    	margin-left: 10%; 
+	    	&::after { 
+	    		content:'';
+				background: url('../images/whiteArrow.png')no-repeat 0 0;
+				transform: rotate(90deg);
+				background-size: 6px 11px;
+				width: 6px;
+				height: 11px;
+				float: right;
+				margin-top: 14px;
+	    	}
+	    }
+	}
 }

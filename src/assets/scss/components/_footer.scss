@@ -43,6 +43,12 @@
 			line-height: 50px;
 			margin-top: 20px;
 		}
+		.social { 
+			float: left; 
+			margin-right: 3%; 
+			opacity: 0.5; 
+			background-size: 270px 20px; 
+		}
 
 	}
 	.bottomFooter {
@@ -57,6 +63,18 @@
 			font-size: $font-size-sm;
 		}
 		.copyright, address { width: 33.33%; display: inline-block; margin: 0 }
-		#backToTop { float: right; }
+		#backToTop { 
+			float: right;
+			position: relative; 
+			&::after { 
+				position: absolute; content:'';
+				background: url(../images/spritesheet.png) no-repeat -312px -1px;
+				background-size: 375px 33px;
+			    width: 28px;
+			    height: 56px;
+			    right: -90px;
+			    margin-top: -5px;
+			}
+		}
 	}
 }

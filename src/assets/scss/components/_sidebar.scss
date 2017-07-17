@@ -16,6 +16,25 @@
 		padding-bottom: 40px;
 		border-bottom: 1px solid $c-gray2;
 		display: none;
+		&.active { display: block; }
+		.attrSel {
+			cursor: pointer;
+			background: $c-gray2;
+		    font-weight: 100;
+		    font-size: $font-size;
+		    line-height: 40px;
+		    padding: 0 10px;
+		    margin-bottom: 10px;
+		    display: none;
+		    position: relative;
+		    &::after { 
+		    	content: '';
+	    	    position: absolute;
+	    	    right: 12px;
+	    	    top: 9px;
+		    }
+		    &.active { display: block; }
+		}
 	}
 	.attrSection {  
 		margin-bottom: 25px;

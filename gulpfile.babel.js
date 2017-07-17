@@ -8,7 +8,6 @@ import sourcemaps   from 'gulp-sourcemaps' // SASS sourcemap builder
 import sassdoc      from 'sassdoc' // SASS Documentation builder
 import jsdoc        from 'gulp-jsdoc3' // JS Documentation builder 
 import jshint       from 'gulp-jshint'
-import uglify       from 'gulp-uglify'
 import concat       from 'gulp-concat'
 import cleanCSS     from 'gulp-clean-css'
 import imagemin     from 'gulp-imagemin'
@@ -213,8 +212,6 @@ gulp.task('copy', () => {
 });
 
 // FULL BUILD OF ALL ASSETS
-gulp.task('build', ['html', 'copy', 'jshint', 'js-compile', 'sass-styles', 'sassdoc', 'jsdoc']);
-
-gulp.task('build-watch', ['html', 'copy', 'js-compile', 'sass-styles','browser-sync'], () => {
-    gulp.watch('src/**/*', ['html', 'copy', 'jshint', 'js-compile', 'sass-styles', 'sassdoc', 'jsdoc']);
+gulp.task('build-watch', ['html', 'copy', 'jshint', 'js-compile', 'sass-styles', 'browser-sync'], () => {
+    return gulp.watch('./src/**/*', ['html', 'jshint', 'js-compile', 'sass-styles', 'sassdoc', 'jsdoc']);
 });
