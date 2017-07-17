@@ -13,6 +13,9 @@ import concat      from 'gulp-concat'
 import cleanCSS    from 'gulp-clean-css'
 import imagemin    from 'gulp-imagemin'
 
+// Handlebars
+import hb           from 'gulp-hb'
+
 // BrowserSync
 import browsync    from 'browser-sync' // create a browser sync instance.
 const browLaunch   = browsync.create();
@@ -35,6 +38,18 @@ let httpServer;
 // create a default task and just log a message
 gulp.task('default', function() {
   return gutil.log('Gulp is running!')
+});
+
+// Handlebars
+gulp.task('handlebars', function () {
+    return gulp
+        .src('./src/{,posts/}*.html')
+        .pipe(hb({
+            partials: './src/templates/partials/*.hbs',
+            helpers: './src/templates/helpers/*.js',
+            data: './src/templates/data/**/*.{js,json}'
+        }))
+        .pipe(gulp.dest('./build'));
 });
 
 // Browser Sync 
