@@ -1,29 +1,32 @@
 /* File: gulpfile.js */
 
 // grab our gulp packages
-import gulp        from 'gulp'
-import gutil       from 'gulp-util'
-import sass        from 'gulp-sass' // SASS compiler
-import sourcemaps  from 'gulp-sourcemaps' // SASS sourcemap builder
-import sassdoc     from 'sassdoc' // SASS Documentation builder
-import jsdoc       from 'gulp-jsdoc3' // JS Documentation builder 
-import jshint      from 'gulp-jshint'
-import uglify      from 'gulp-uglify'
-import concat      from 'gulp-concat'
-import cleanCSS    from 'gulp-clean-css'
-import imagemin    from 'gulp-imagemin'
+import gulp         from 'gulp'
+import gutil        from 'gulp-util'
+import sass         from 'gulp-sass' // SASS compiler
+import sourcemaps   from 'gulp-sourcemaps' // SASS sourcemap builder
+import sassdoc      from 'sassdoc' // SASS Documentation builder
+import jsdoc        from 'gulp-jsdoc3' // JS Documentation builder 
+import jshint       from 'gulp-jshint'
+import uglify       from 'gulp-uglify'
+import concat       from 'gulp-concat'
+import cleanCSS     from 'gulp-clean-css'
+import imagemin     from 'gulp-imagemin'
+import autoprefixer from 'gulp-autoprefixer'
 
 // Handlebars
-import hb           from 'gulp-hb'
+import handlebars   from 'gulp-compile-handlebars'
+import rename       from 'gulp-rename'
+import del          from 'del'
 
 // BrowserSync
-import browsync    from 'browser-sync' // create a browser sync instance.
-const browLaunch   = browsync.create();
+import browsync     from 'browser-sync' // create a browser sync instance.
+const browLaunch    = browsync.create();
 
 // PSI
-import psiNgrok    from 'psi-ngrok' // Tunneling for PSI support
-import connect     from 'gulp-connect'
-const port         = 8000;
+import psiNgrok     from 'psi-ngrok' // Tunneling for PSI support
+import connect      from 'gulp-connect'
+const port          = 8000;
 
 // Testing Harness
 import http         from 'http'
@@ -36,20 +39,8 @@ let httpServer;
 
 
 // create a default task and just log a message
-gulp.task('default', function() {
+gulp.task('default', () => {
   return gutil.log('Gulp is running!')
-});
-
-// Handlebars
-gulp.task('handlebars', function () {
-    return gulp
-        .src('./src/{,posts/}*.html')
-        .pipe(hb({
-            partials: './src/templates/partials/*.hbs',
-            helpers: './src/templates/helpers/*.js',
-            data: './src/templates/data/**/*.{js,json}'
-        }))
-        .pipe(gulp.dest('./build'));
 });
 
 // Browser Sync 
@@ -61,8 +52,25 @@ gulp.task('browser-sync', function() {
     });
 });
 
+// Handlebars
+const config = {
+  src: './src/templates',
+  dest: './build',
+};
+
+gulp.task('html', () => {
+  return gulp.src(`${config.src}/pages/*.hbs`)
+    .pipe(handlebars({}, {
+      ignorePartials: true,
+      batch: [`${config.src}/partials`]
+    }))
+    .pipe(rename({
+      extname: '.html'
+    }))
+    .pipe(gulp.dest(config.dest));
+});
+
 // SASS manual compile
-// Development
 gulp.task('sass-styles', () => {
     return gulp.src('src/assets/scss/**/*.scss')
         .pipe(sourcemaps.init())
@@ -108,7 +116,7 @@ gulp.task('sass-compile',['sass-styles', 'sassdoc']);
 
 // JSDoc compilation
 gulp.task('jsdoc', cb => {
-    const config = require('./jsdocConfig.json')
+    const config = require('./jsdocConfig.json');
     gulp.src(['README.md', 'src/js/*.js'], {read: false})
         .pipe(jsdoc(config), cb);
 });
@@ -195,9 +203,18 @@ gulp.task('images', () => {
         .pipe(gulp.dest('src/assets/images/'))
 });
 
-// FULL BUILD OF ALL ASSETS
-gulp.task('build', ['images', 'jshint', 'js-compile', 'sass-styles', 'sassdoc', 'jsdoc']);
+// Gulp Copy Task
+gulp.task('copy', () => {
+    return gulp.src([
+      'src/assets/images/*'
+    ], {
+        base: 'src/assets'
+    }).pipe(gulp.dest('build/assets'));
+});
 
-gulp.task('build-watch', ['js-compile', 'sass-styles','browser-sync'], () => {
-    gulp.watch('src/**/*', ['jshint', 'js-compile', 'sass-styles', 'sassdoc', 'jsdoc']);
+// FULL BUILD OF ALL ASSETS
+gulp.task('build', ['html', 'copy', 'jshint', 'js-compile', 'sass-styles', 'sassdoc', 'jsdoc']);
+
+gulp.task('build-watch', ['html', 'copy', 'js-compile', 'sass-styles','browser-sync'], () => {
+    gulp.watch('src/**/*', ['html', 'copy', 'jshint', 'js-compile', 'sass-styles', 'sassdoc', 'jsdoc']);
 });
