@@ -1,28 +1,34 @@
 /* File: gulpfile.js */
 
 // grab our gulp packages
-const   gulp        = require('gulp'),
-        gutil       = require('gulp-util'),
-        sass        = require('gulp-sass'), // SASS compiler
-        sourcemaps  = require('gulp-sourcemaps'), // SASS sourcemap builder
-        sassdoc     = require('sassdoc'), // SASS Documentation builder
-        jsdoc       = require('gulp-jsdoc3'), // JS Documentation builder 
-        jshint      = require('gulp-jshint'),
-        uglify      = require('gulp-uglify'),
-        concat      = require('gulp-concat'),
-        cleanCSS    = require('gulp-clean-css'),
-        browsync    = require('browser-sync').create(), // create a browser sync instance.
-        psiNgrok    = require('psi-ngrok'), // Tunneling for PSI support
-        connect     = require('gulp-connect'),
-        port        = 8000,
-        imagemin    = require('gulp-imagemin');
-        // Testing Harness
-        import http from 'http'
-        import kinect from 'connect'
-        import serveStatic from 'serve-static'
-        import selenium from 'selenium-standalone'
-        import webdriver from 'gulp-webdriver'
-        let httpServer;
+import gulp        from 'gulp'
+import gutil       from 'gulp-util'
+import sass        from 'gulp-sass' // SASS compiler
+import sourcemaps  from 'gulp-sourcemaps' // SASS sourcemap builder
+import sassdoc     from 'sassdoc' // SASS Documentation builder
+import jsdoc       from 'gulp-jsdoc3' // JS Documentation builder 
+import jshint      from 'gulp-jshint'
+import uglify      from 'gulp-uglify'
+import concat      from 'gulp-concat'
+import cleanCSS    from 'gulp-clean-css'
+import imagemin    from 'gulp-imagemin'
+
+// BrowserSync
+import browsync    from 'browser-sync' // create a browser sync instance.
+const browLaunch   = browsync.create();
+
+// PSI
+import psiNgrok    from 'psi-ngrok' // Tunneling for PSI support
+import connect     from 'gulp-connect'
+const port         = 8000;
+
+// Testing Harness
+import http         from 'http'
+import kinect       from 'connect'
+import serveStatic  from 'serve-static'
+import selenium     from 'selenium-standalone'
+import webdriver    from 'gulp-webdriver'
+let httpServer;
 
 
 
@@ -33,7 +39,7 @@ gulp.task('default', function() {
 
 // Browser Sync 
 gulp.task('browser-sync', function() {
-    browsync.init({
+    browLaunch.init({
         server: {
             baseDir: "build/"
         }
@@ -42,7 +48,7 @@ gulp.task('browser-sync', function() {
 
 // SASS manual compile
 // Development
-gulp.task('sass-styles', function () {
+gulp.task('sass-styles', () => {
     return gulp.src('src/assets/scss/**/*.scss')
         .pipe(sourcemaps.init())
         .pipe(sass({ includePaths: 'node_modules/breakpoint-sass/stylesheets'}).on('error', sass.logError))
@@ -52,11 +58,11 @@ gulp.task('sass-styles', function () {
             console.log(details.name + ' original size: ' + details.stats.originalSize);
             console.log(details.name + ' NEW size: ' + details.stats.minifiedSize);
         }))
-        .pipe(browsync.reload({stream: true})); // prompts a reload after compilation
+        .pipe(browLaunch.reload({stream: true})); // prompts a reload after compilation
 });
 
 // SASSDoc compile
-gulp.task('sassdoc', function () {
+gulp.task('sassdoc', () => {
   var options = {
     dest: 'build/sassdoc',
   };
@@ -66,7 +72,7 @@ gulp.task('sassdoc', function () {
 });
 
 // SASS watch task
-gulp.task('sass-watch', ['browser-sync'], function () {
+gulp.task('sass-watch', ['browser-sync'], () => {
     gulp.watch('src/assests/scss/**/*.scss', ['sass-styles', 'sassdoc']);
 });
 
@@ -74,26 +80,25 @@ gulp.task('sass-watch', ['browser-sync'], function () {
 gulp.task('sass-compile',['sass-styles', 'sassdoc']);
 
 // JSDoc compilation
-gulp.task('jsdoc', function (cb) {
+gulp.task('jsdoc', cb => {
     gulp.src(['README.md', 'src/js/**/*.js'], {read: false})
         .pipe(jsdoc(require('./jsdocConfig.json'), cb));
 });
 
 // PSI Score Retrieval
-gulp.task('psi', function () {
+gulp.task('psi', () => {
   psiNgrok({
     pages: ['index.html'],
     port: port,
-    onBeforeConnect: function () {
+    onBeforeConnect: () => {
         return connect.server({ root: 'public', port: port })
     },
     onError: function (err) {
       console.log(err.toString());
       process.exit(-1);
     },
-    onSuccess: function () {
-        console.log(_self);
-        setTimeout(function () { process.exit(-1) },10)
+    onSuccess: () => {
+        setTimeout(() => { process.exit(-1) },100)
     },
     options: { threshold: 80 }
   });
@@ -150,7 +155,7 @@ gulp.task('jshint', () =>
 );
 
 // JS Build watch task
-gulp.task('js-compile', function () {
+gulp.task('js-compile', () => {
     gulp.src('src/assets/js/**/*.js')
         .pipe(uglify())
         .pipe(concat('compiledJS.js'))
@@ -158,7 +163,7 @@ gulp.task('js-compile', function () {
 });
 
 // Image optimization task
-gulp.task('images', function () {
+gulp.task('images', () => {
     gulp.src('src/assets/images/*')
         .pipe(imagemin())
         .pipe(gulp.dest('src/assets/images/'))
@@ -167,6 +172,6 @@ gulp.task('images', function () {
 // FULL BUILD OF ALL ASSETS
 gulp.task('build', ['images', 'jshint', 'js-compile', 'sass-styles', 'sassdoc', 'jsdoc']);
 
-gulp.task('build-watch', ['js-compile', 'sass-styles','browser-sync'], function () {
+gulp.task('build-watch', ['js-compile', 'sass-styles','browser-sync'], () => {
     gulp.watch('src/**/*', ['jshint', 'js-compile', 'sass-styles', 'sassdoc', 'jsdoc']);
 });
