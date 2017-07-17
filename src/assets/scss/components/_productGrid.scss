@@ -13,13 +13,13 @@
     &.prodLimit18 { .product:nth-child(n+19) { display: none } }
     &.prodLimit21 { .product:nth-child(n+22) { display: none } }
 
-    &.smallProd { width: 665px }
+    &.smallProd { width: 46.8%; .product { width: 40.6%; } }
 	.product {
 		width: 25.5%;
 		height: 405px;
 		margin-top: 60px;
 
-		img { width: 100% }
+		img { width: 100%; border: 1px solid #e1e1e1; }
 		h3 { margin: 10px 0 12px 0 }
 
 		.price {
